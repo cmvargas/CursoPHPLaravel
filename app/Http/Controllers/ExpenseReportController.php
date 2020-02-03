@@ -14,7 +14,9 @@ class ExpenseReportController extends Controller
      */
     public function index()
     {
-        return ExpenseReport::all();
+        return view('expenseReport.index',[
+            'expenseReports' => ExpenseReport::all()
+        ]);
     }
 
     /**
@@ -81,5 +83,22 @@ class ExpenseReportController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function traffik(){
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET','http://localhost/api/prueba'
+        //         'proxy' => [
+        //             'http'  => 'tcp://10.130.10.9:8080', // Use this proxy with "http"
+        //             'https' => 'tcp://10.130.10.9:8080', // Use this proxy with "https",
+        //         ]
+        // ]
+        // [
+        //     'headers'=>[
+        //         'accept' => 'application/json',
+        //         'Authorization' => 'Bearer'.env('TOKEN_TRAFFIK')
+        //     ]
+        // ]
+    );
+        return $response;
     }
 }
