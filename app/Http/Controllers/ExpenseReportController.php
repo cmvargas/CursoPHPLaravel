@@ -37,6 +37,9 @@ class ExpenseReportController extends Controller
      */
     public function store(Request $request)
     {
+        $validaData = $request->validate([
+            'title' => 'required|min:3'
+        ]);
         $report = new ExpenseReport();
         $report->title = $request->get('title');
         $report->save();
@@ -62,7 +65,10 @@ class ExpenseReportController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reports = ExpenseReport::findOrFail($id);
+        return view('expenseReport.edit',[
+            'report' => $reports
+        ]);
     }
 
     /**
@@ -74,7 +80,10 @@ class ExpenseReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $report = ExpenseReport::find($id);
+        $report->title = $request->get('title');
+        $report->save();
+        return redirect('/expense_reports');
     }
 
     /**
@@ -85,7 +94,15 @@ class ExpenseReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $report = ExpenseReport::find($id);
+        $report->delete();
+        return redirect('/expense_reports');
+    }
+    public function confirmDelete($id){
+        $reports =ExpenseReport::find($id);
+        return view('expenseReport.confirmDelete',[
+            'report' => $reports
+        ]);
     }
     public function traffik(){
         $client = new \GuzzleHttp\Client();

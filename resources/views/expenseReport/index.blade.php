@@ -18,6 +18,8 @@
               @foreach ($expenseReports as $expenseReport)
               <tr>
                   <td>{{$expenseReport->title}}</td>
+                  <td><a href="/expense_reports/{{$expenseReport->id}}/edit">Edit</a></td>
+                  <td><a href="/expense_reports/{{$expenseReport->id}}/confirmDelete">Delete</a></td>
               </tr>
               @endforeach
           </table>

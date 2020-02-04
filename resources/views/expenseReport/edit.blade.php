@@ -4,7 +4,7 @@
     <div class="col">
       <div class="row">
         <div class="col">
-          <h1>Reports</h1>
+          <h1>Edit report {{$report->id}}</h1>
         </div>
       </div>
       <div class="row">
@@ -14,20 +14,12 @@
       </div>
       <div class="row">
         <div class="col">
-          @if($errors->any())
-            <div class="alert alert-danger">
-              <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach
-              </ul>
-            </div>
-          @endif
-          <form action="/expense_reports" method="post">
+        <form action="/expense_reports/{{$report->id}}" method="POST">
             @csrf
+            @method('put')
             <div class="form-group">
               <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Type a title" value="{{old('title')}}">
+              <input type="text" class="form-control" id="title" name="title" placeholder="Type a title">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
