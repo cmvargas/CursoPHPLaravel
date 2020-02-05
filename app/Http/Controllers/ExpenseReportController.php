@@ -43,7 +43,7 @@ class ExpenseReportController extends Controller
         $report = new ExpenseReport();
         $report->title = $request->get('title');
         $report->save();
-        return redirect('expense_reports'); 
+        return redirect('expense_reports');
     }
 
     /**
@@ -52,9 +52,11 @@ class ExpenseReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ExpenseReport $expenseReport)
     {
-        //
+        return view('expenseReport.show',[
+            'report' => $expenseReport
+        ]);
     }
 
     /**
