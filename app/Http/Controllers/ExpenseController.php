@@ -41,9 +41,10 @@ class ExpenseController extends Controller
         $expense = new Expense();
         $expense->description = $request->get('description');
         $expense->amount = $request->get('amount');
+        $expense->expense_report_id = $expenseReport->id;
         $expense->save();
-        dd($request->all());
-        
+        return redirect('/expense_reports/'.$expenseReport->id);
+
     }
 
     /**
